@@ -1,0 +1,63 @@
+﻿<Window
+    x:Class="Network.Server.Wpf.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converter="clr-namespace:Network.Server.Wpf.Infrastructure.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Network.Server.Wpf"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodel="clr-namespace:Network.Server.Wpf.ViewModel"
+    Title="MainWindow"
+    Width="800"
+    Height="450"
+    d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel}"
+    FontSize="15"
+    mc:Ignorable="d">
+
+    <Grid ShowGridLines="True">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="4*" />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0">
+            <Label
+                Content="IP:Порт"
+                Target="{Binding ElementName=EndPoint}"
+                Visibility="{Binding EndPointInputVisibility}" />
+            <TextBox
+                Name="EndPoint"
+                Padding="5"
+                Text="{Binding EndPoint}"
+                Visibility="{Binding EndPointInputVisibility}"/>
+
+
+            <CheckBox
+                Margin="5"
+                Command="{Binding ChangeVisibilityCommand}"
+                IsChecked="{Binding AutoEndPointSelection}">
+                <TextBlock Text="Автоматический выбор Конечной точки" TextWrapping="WrapWithOverflow" />
+            </CheckBox>
+            
+
+            <Button
+                Padding="5"
+                Content="Заупстить сервер"
+                DockPanel.Dock="Bottom"
+                Visibility="Visible"
+                Command="{Binding RunServerCommand}"/>
+            <Button
+                Padding="5"
+                Content="Остановить сервер"
+                DockPanel.Dock="Bottom" 
+                Visibility="Collapsed"
+                Command="{Binding StopServerCommand}"/>
+            
+        </StackPanel>
+
+        <StackPanel Grid.Column="1">
+            <Label Content="Логи" />
+        </StackPanel>
+
+    </Grid>
+</Window>
