@@ -5,7 +5,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Network.Server.Headers
+namespace Network.Server.Request
 {
     public class HttpRequestHeaders : HttpHeaders
     { }

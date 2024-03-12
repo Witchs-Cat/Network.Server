@@ -7,13 +7,16 @@ using System.Threading.Tasks;
 
 namespace Network.Server.Wpf.Infrastructure.Commands
 {
+ 
     public class LambdaCommand : BaseCommand
     {
         private readonly Action<object?> _execute;
         private readonly Func<object?, bool> _canExecute;
 
         public LambdaCommand(Action<object?> execute) : this(execute, (parametr) => true) 
-        { }
+        {
+ 
+        }
 
         public LambdaCommand(Action<object?> execute, Func<object?, bool> canExecute)
         {

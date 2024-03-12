@@ -45,15 +45,17 @@ namespace Network.Server
                 Socket tcpClient = await _tcpLisener.AcceptAsync(token).ConfigureAwait(false);
 
                 _ = _requestHandler.ProcessingAsync(tcpClient)
-                    .ContinueWith((task) =>
-                    {
-                        if (task.IsFaulted)
-                            _logger?.LogDebug(task.Exception, "faulted");
-                        else
-                            _logger?.LogDebug("successful");
-                    });
+                    .ContinueWith(OnProcessed);
             }
-        }        
+        }
+
+        private void OnProcessed(Task task)
+        {
+            if (task.IsFaulted)
+                _logger?.LogDebug(task.Exception, "faulted");
+            else
+                _logger?.LogDebug("successful");
+        }
 
         public Task StopAsync() 
         {
